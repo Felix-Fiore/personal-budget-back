@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const users = [{ firstName: 'John', lastName: 'Doe', age: 30 }];
+const users = [{ firstName: 'John', lastName: 'Doe', age: 29 }];
 
 // all routes in here are starting with /api/users
 router.get('/', (req, res) => {
