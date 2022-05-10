@@ -4,6 +4,7 @@ const {
     getOperationById,
     createOperation,
     deleteOperation,
+    updateOperation,
 } = require('../controllers/operations');
 
 const router = Router();
@@ -12,6 +13,8 @@ const router = Router();
 router.get('/', getOperations);
 
 router.get('/:id', getOperationById);
+
+router.put('/:id', updateOperation);
 
 router.post('/', createOperation);
 
