@@ -1,28 +1,32 @@
 const users = [];
 
 const getUsers = async (req, res) => {
-    res.send(users);
+    res.status(201).send({
+        message: 'Users retrieved successfully',
+    });
 };
 
 const getUserById = async (req, res) => {
-    const user = users.find((user) => user.id === parseInt(req.params.id));
-    if (!user) {
-        res.status(404).send('The user with the given ID was not found.');
-    } else {
-        res.send(user);
-    }
+    res.status(201).send({
+        message: 'User retrieved successfully',
+    });
 };
 
 const createUser = async (req, res) => {
-    const user = req.body;
+    res.status(201).send({
+        message: 'User created successfully',
+    });
+};
 
-    users.push(user);
-
-    res.send(user);
+const loginUser = async (req, res) => {
+    res.status(201).send({
+        message: 'User logged in successfully',
+    });
 };
 
 module.exports = {
     getUsers,
     getUserById,
     createUser,
+    loginUser,
 };
