@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const User = require('../models/user-model');
+const { generateToken } = require('../helpers/jwt');
 
 const createUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -17,8 +18,14 @@ const createUser = async (req, res) => {
 
         await user.save();
 
+        // Generate token
+        const token = await generateToken(user._id, user.name);
+
         res.status(201).send({
             message: 'User created successfully',
+            uid: user._id,
+            name: user.name,
+            token,
         });
     } catch (error) {
         res.status(500).send({
@@ -55,8 +62,14 @@ const loginUser = async (req, res) => {
         });
     }
 
+    // Generate token
+    const token = await generateToken(user.id, user.name);
+
     res.status(201).send({
         message: 'User logged in successfully',
+        uid: user.id,
+        name: user.name,
+        token,
     });
 };
 
