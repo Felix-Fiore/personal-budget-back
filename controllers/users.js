@@ -1,16 +1,19 @@
-const users = [];
+const bcrypt = require('bcryptjs');
 
 const User = require('../models/user-model');
 
 const createUser = async (req, res) => {
     const { name, email, password } = req.body;
-
     try {
         const user = new User({
             name,
             email,
             password,
         });
+
+        // Encrypt password
+        const salt = bcrypt.genSaltSync();
+        user.password = bcrypt.hashSync(password, salt);
 
         await user.save();
 
@@ -21,6 +24,7 @@ const createUser = async (req, res) => {
         res.status(500).send({
             message: 'User creation failed',
         });
+        console.log(error);
     }
 };
 
