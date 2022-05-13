@@ -28,6 +28,38 @@ const createUser = async (req, res) => {
     }
 };
 
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
+    let user = await User.findOne({ email });
+
+    try {
+        if (!user) {
+            return res.status(400).send({
+                message: 'User not found',
+            });
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: 'User Login Failed',
+        });
+        console.log(error);
+    }
+
+    // Compare password
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+
+    if (!isPasswordValid) {
+        return res.status(400).send({
+            message: 'Invalid password',
+        });
+    }
+
+    res.status(201).send({
+        message: 'User logged in successfully',
+    });
+};
+
 const getUsers = async (req, res) => {
     res.status(201).send({
         message: 'Users retrieved successfully',
@@ -37,12 +69,6 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     res.status(201).send({
         message: 'User retrieved successfully',
-    });
-};
-
-const loginUser = async (req, res) => {
-    res.status(201).send({
-        message: 'User logged in successfully',
     });
 };
 

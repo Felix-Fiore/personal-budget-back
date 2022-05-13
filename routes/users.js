@@ -16,7 +16,7 @@ router.get('/', getUsers);
 router.get('/:id', getUserById);
 
 router.post(
-    '/',
+    '/new',
     [
         check('name', 'Name is required').not().isEmpty(),
         check('email', 'Email is required').isEmail(),
