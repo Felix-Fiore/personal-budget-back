@@ -1,7 +1,12 @@
 const Operation = require('../models/operation-model');
 
-const getOperations = (req, res) => {
-    res.status(201).send("msg: 'Operations retrieved successfully'");
+const getOperations = async (req, res) => {
+    const operations = await Operation.find().populate('user', 'name');
+
+    res.status(201).send({
+        msg: 'Operations retrieved successfully',
+        operations,
+    });
 };
 
 const getOperationById = (req, res) => {
