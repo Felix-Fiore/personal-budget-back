@@ -4,13 +4,17 @@ const {
     getUserById,
     createUser,
     loginUser,
+    revalidateJWK,
 } = require('../controllers/users');
 const { check } = require('express-validator');
 const { fieldValidator } = require('../middlewares/fieldsValidator');
+const { jwtValidate } = require('../middlewares/jwtValidate');
 
 const router = Router();
 
 // all routes in here are starting with /api/users
+router.get('/renew', jwtValidate, revalidateJWK);
+
 router.get('/', getUsers);
 
 router.get('/:id', getUserById);

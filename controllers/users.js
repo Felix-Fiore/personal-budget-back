@@ -85,9 +85,24 @@ const getUserById = async (req, res) => {
     });
 };
 
+const revalidateJWK = async (req, res) => {
+    const { uid, name } = req;
+
+    // Generate token
+    const token = await generateToken(uid, name);
+
+    res.status(201).send({
+        message: 'User revalidated successfully',
+        uid,
+        name,
+        token,
+    });
+};
+
 module.exports = {
     getUsers,
     getUserById,
     createUser,
     loginUser,
+    revalidateJWK,
 };
