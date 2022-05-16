@@ -33,4 +33,11 @@ const operationSchema = new Schema({
     },
 });
 
+// Change the name of the values __v and _id when we call the method toJSON()
+operationSchema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+});
+
 module.exports = model('Operation', operationSchema);
