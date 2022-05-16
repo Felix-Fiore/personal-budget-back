@@ -1,3 +1,5 @@
+const Operation = require('../models/operation-model');
+
 const getOperations = (req, res) => {
     res.status(201).send("msg: 'Operations retrieved successfully'");
 };
@@ -12,10 +14,23 @@ const getOperationsByCategory = (req, res) => {
     );
 };
 
-const createOperation = (req, res) => {
-    res.status(201).send({
-        message: 'Operation created successfully',
-    });
+const createOperation = async (req, res) => {
+    const operation = new Operation(req.body);
+
+    try {
+        operation.user = req.uid;
+
+        const savedOperation = await operation.save();
+        res.status(201).send({
+            message: 'Operation created successfully',
+            savedOperation,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Operation creation failed',
+        });
+    }
 };
 
 const updateOperation = (req, res) => {
