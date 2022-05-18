@@ -24,15 +24,6 @@ const getOperationsByCategory = async (req, res) => {
     });
 };
 
-const getOperationById = async (req, res) => {
-    const operationById = await Operation.findById(req.params.id);
-
-    res.status(201).send({
-        msg: 'Operation retrieved successfully',
-        operationById,
-    });
-};
-
 const createOperation = async (req, res) => {
     const operation = new Operation(req.body);
 
