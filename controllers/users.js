@@ -73,18 +73,6 @@ const loginUser = async (req, res) => {
     });
 };
 
-const getUsers = async (req, res) => {
-    res.status(201).send({
-        message: 'Users retrieved successfully',
-    });
-};
-
-const getUserById = async (req, res) => {
-    res.status(201).send({
-        message: 'User retrieved successfully',
-    });
-};
-
 const revalidateJWK = async (req, res) => {
     const { uid, name } = req;
 

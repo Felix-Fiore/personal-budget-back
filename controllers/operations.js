@@ -1,5 +1,4 @@
 const Operation = require('../models/operation-model');
-var express = require('express');
 
 const getOperations = async (req, res) => {
     const operations = await Operation.find().populate('user', 'name');

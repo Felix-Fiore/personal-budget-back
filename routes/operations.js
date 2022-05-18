@@ -22,8 +22,6 @@ router.get('/', getOperations);
 
 router.get('/category', getOperationsByCategory);
 
-router.get('/:id', getOperationById);
-
 router.post(
     '/',
     [

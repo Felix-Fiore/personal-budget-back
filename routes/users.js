@@ -15,10 +15,6 @@ const router = Router();
 // all routes in here are starting with /api/users
 router.get('/renew', jwtValidate, revalidateJWK);
 
-router.get('/', getUsers);
-
-router.get('/:id', getUserById);
-
 router.post(
     '/new',
     [
