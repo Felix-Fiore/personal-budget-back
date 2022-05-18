@@ -88,8 +88,6 @@ const revalidateJWK = async (req, res) => {
 };
 
 module.exports = {
-    getUsers,
-    getUserById,
     createUser,
     loginUser,
     revalidateJWK,

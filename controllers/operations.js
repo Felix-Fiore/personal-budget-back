@@ -101,7 +101,6 @@ const deleteOperation = async (req, res) => {
 
 module.exports = {
     getOperations,
-    getOperationById,
     getOperationsByCategory,
     createOperation,
     updateOperation,
