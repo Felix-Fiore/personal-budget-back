@@ -1,7 +1,9 @@
 const Operation = require('../models/operation-model');
+var express = require('express');
 
 const getOperations = async (req, res) => {
     const operations = await Operation.find().populate('user', 'name');
+    console.log(operations);
 
     res.status(201).send({
         msg: 'Operations retrieved successfully',
@@ -9,14 +11,26 @@ const getOperations = async (req, res) => {
     });
 };
 
-const getOperationById = (req, res) => {
-    res.status(201).send("msg: 'Operation retrieved successfully'");
+const getOperationsByCategory = async (req, res) => {
+    const { category } = req.body;
+
+    const operationsByCategory = await Operation.find({
+        category,
+    });
+
+    res.status(201).send({
+        msg: 'Operations successfully retrieved by category',
+        operationsByCategory,
+    });
 };
 
-const getOperationsByCategory = (req, res) => {
-    res.status(201).send(
-        "msg: 'Operations successfully retrieved by category'"
-    );
+const getOperationById = async (req, res) => {
+    const operationById = await Operation.findById(req.params.id);
+
+    res.status(201).send({
+        msg: 'Operation retrieved successfully',
+        operationById,
+    });
 };
 
 const createOperation = async (req, res) => {

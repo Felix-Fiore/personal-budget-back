@@ -20,21 +20,9 @@ router.use(jwtValidate);
 // all routes in here are starting with /api/operations
 router.get('/', getOperations);
 
+router.get('/category', getOperationsByCategory);
+
 router.get('/:id', getOperationById);
-
-router.get('/', getOperationsByCategory);
-
-router.put(
-    '/:id',
-    [
-        check('category', 'Category is required').not().isEmpty(),
-        check('amount', 'Amount is required').not().isEmpty(),
-        check('date', 'Date is required').custom(date),
-        check('description', 'Description is required').not().isEmpty(),
-        fieldValidator,
-    ],
-    updateOperation
-);
 
 router.post(
     '/',
@@ -50,5 +38,17 @@ router.post(
 );
 
 router.delete('/:id', deleteOperation);
+
+router.put(
+    '/:id',
+    [
+        check('category', 'Category is required').not().isEmpty(),
+        check('amount', 'Amount is required').not().isEmpty(),
+        check('date', 'Date is required').custom(date),
+        check('description', 'Description is required').not().isEmpty(),
+        fieldValidator,
+    ],
+    updateOperation
+);
 
 module.exports = router;
