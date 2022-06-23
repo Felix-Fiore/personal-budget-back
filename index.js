@@ -4,7 +4,7 @@ const { sequelize } = require('./database/config');
 
 require('dotenv').config();
 require('./models/users');
-
+require('./models/operations');
 // Create a new express application instance
 const app = express();
 
