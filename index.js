@@ -3,15 +3,15 @@ const cors = require('cors');
 const { sequelize } = require('./database/config');
 
 require('dotenv').config();
-require('./models/users');
-require('./models/operations');
+require('./models/Users');
+require('./models/Operations');
 // Create a new express application instance
 const app = express();
 
 // Database connection
 const sequelizeStart = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     // Start the server
     app.listen(process.env.PORT, () => {
       console.log(`Server is running on port ${process.env.PORT}`);

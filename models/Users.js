@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/config');
+const { operations } = require('./Operations');
 
 const users = sequelize.define('users', {
   id: {
@@ -23,6 +24,15 @@ const users = sequelize.define('users', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+});
+
+users.hasMany(operations, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
+
+operations.belongsTo(users, {
+  foreignKey: 'userId',
 });
 
 module.exports = users;
