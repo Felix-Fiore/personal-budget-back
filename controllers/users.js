@@ -1,29 +1,34 @@
 const bcrypt = require('bcryptjs');
 
 const { generateToken } = require('../helpers/jwt');
+const users = require('../models/Users');
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const user = new User({
-      name,
-      email,
-      password,
-    });
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
 
     // Encrypt password
     const salt = bcrypt.genSaltSync();
     user.password = bcrypt.hashSync(password, salt);
 
-    await user.save();
+    const newUser = await users.create({
+      name,
+      email,
+      password: user.password,
+    });
 
     // Generate token
-    const token = await generateToken(user._id, user.name);
+    const token = await generateToken(newUser.id, newUser.name);
 
     res.status(201).send({
       message: 'User created successfully',
-      uid: user._id,
-      name: user.name,
+      uid: newUser.id,
+      name: newUser.name,
       token,
     });
   } catch (error) {
