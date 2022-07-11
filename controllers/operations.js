@@ -1,18 +1,26 @@
+const { operations } = require('../models/Operations');
+const users = require('../models/Users');
+
 const getOperations = async (req, res) => {
-  const operations = await Operation.find().populate('user', 'name');
-  console.log(operations);
+  /*   const operationsResult = await operations.findAll({
+    where: {
+      userId: req.userId,
+    },
+  }); */
 
   res.status(201).send({
     msg: 'Operations retrieved successfully',
-    operations,
+    operationsResult,
   });
 };
 
 const getOperationsByCategory = async (req, res) => {
   const { category } = req.body;
 
-  const operationsByCategory = await Operation.find({
-    category,
+  let operationsByCategory = await operations.findAll({
+    where: {
+      category: category,
+    },
   });
 
   res.status(201).send({
@@ -22,15 +30,22 @@ const getOperationsByCategory = async (req, res) => {
 };
 
 const createOperation = async (req, res) => {
-  const operation = new Operation(req.body);
+  const { type, category, amount, date } = req.body;
 
   try {
-    operation.user = req.uid;
+    const newOperation = {
+      type: type,
+      category: category,
+      amount: amount,
+      date: date,
+      uid: req.uid,
+    };
 
-    const savedOperation = await operation.save();
+    const operation = await operations.create(newOperation);
+
     res.status(201).send({
-      message: 'Operation created successfully',
-      savedOperation,
+      msg: 'Operation created successfully',
+      operation,
     });
   } catch (error) {
     console.log(error);
@@ -54,7 +69,6 @@ const updateOperation = async (req, res) => {
 
     const newOperation = { ...req.body };
 
-    // { new: true } tells mongoose to return the updated document
     const updatedOperation = await Operation.findByIdAndUpdate(
       operationId,
       newOperation,

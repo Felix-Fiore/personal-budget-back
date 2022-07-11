@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/config');
 const { operations } = require('./Operations');
-
 const users = sequelize.define('users', {
   id: {
     type: DataTypes.INTEGER,
@@ -27,12 +26,14 @@ const users = sequelize.define('users', {
 });
 
 users.hasMany(operations, {
-  foreignKey: 'userId',
+  foreignKey: 'uid',
+  sourceKey: 'id',
   onDelete: 'CASCADE',
 });
 
 operations.belongsTo(users, {
-  foreignKey: 'userId',
+  foreignKey: 'uid',
+  targetKey: 'id',
 });
 
 module.exports = users;
