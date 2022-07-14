@@ -2,11 +2,7 @@ const { operations } = require('../models/Operations');
 const users = require('../models/Users');
 
 const getOperations = async (req, res) => {
-  /*   const operationsResult = await operations.findAll({
-    where: {
-      userId: req.userId,
-    },
-  }); */
+  const operationsResult = await operations.findAll();
 
   res.status(201).send({
     msg: 'Operations retrieved successfully',
