@@ -54,8 +54,6 @@ const createOperation = async (req, res) => {
 const updateOperation = async (req, res) => {
   const operationId = req.params.id;
 
-  console.log(operationId);
-
   const { category, amount, date } = req.body;
 
   try {
@@ -99,7 +97,11 @@ const deleteOperation = async (req, res) => {
   const operationId = req.params.id;
 
   try {
-    const operation = await Operation.findById(operationId);
+    const operation = await operations.findAll({
+      where: {
+        id: operationId,
+      },
+    });
 
     if (!operation) {
       res.status(404).send({
@@ -107,7 +109,11 @@ const deleteOperation = async (req, res) => {
       });
     }
 
-    await Operation.findByIdAndDelete(operationId);
+    await operations.destroy({
+      where: {
+        id: operationId,
+      },
+    });
 
     res.json({
       message: 'Operation deleted successfully',
