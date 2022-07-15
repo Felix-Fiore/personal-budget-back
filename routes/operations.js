@@ -42,7 +42,7 @@ router.put(
     check('category', 'Category is required').not().isEmpty(),
     check('amount', 'Amount is required').not().isEmpty(),
     check('date', 'Date is required').custom(date),
-    check('description', 'Description is required').not().isEmpty(),
+
     fieldValidator,
   ],
   updateOperation

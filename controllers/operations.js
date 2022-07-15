@@ -54,8 +54,22 @@ const createOperation = async (req, res) => {
 const updateOperation = async (req, res) => {
   const operationId = req.params.id;
 
+  console.log(operationId);
+
+  const { category, amount, date } = req.body;
+
   try {
-    const operation = await Operation.findById(operationId);
+    const operation = await operations.findAll({
+      where: {
+        id: operationId,
+      },
+    });
+
+    const newOperation = {
+      category,
+      amount,
+      date,
+    };
 
     if (!operation) {
       res.status(404).send({
@@ -63,17 +77,15 @@ const updateOperation = async (req, res) => {
       });
     }
 
-    const newOperation = { ...req.body };
-
-    const updatedOperation = await Operation.findByIdAndUpdate(
-      operationId,
-      newOperation,
-      { new: true }
-    );
+    await operations.update(newOperation, {
+      where: {
+        id: operationId,
+      },
+    });
 
     res.json({
       message: 'Operation updated successfully',
-      updatedOperation,
+      operation,
     });
   } catch (error) {
     console.log(error);
