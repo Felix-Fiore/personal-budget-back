@@ -8,6 +8,9 @@ require('./models/Operations');
 // Create a new express application instance
 const app = express();
 
+// Public folder
+app.use(express.static('public'));
+
 // Database connection
 const sequelizeStart = async () => {
   try {
