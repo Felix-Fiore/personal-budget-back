@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./database/config');
 
-require('dotenv').config();
 require('./models/Users');
 require('./models/Operations');
 // Create a new express application instance
