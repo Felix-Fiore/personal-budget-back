@@ -42,16 +42,16 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  let user = await users.findAll({
-    where: {
-      email: email,
-    },
-  });
-
-  //the findAll method returns an array of objects so we need to get the first object in the array to get the password of the user
-  user = user[0];
-
   try {
+    let user = await users.findAll({
+      where: {
+        email: email,
+      },
+    });
+
+    //the findAll method returns an array of objects so we need to get the first object in the array to get the password of the user
+    user = user[0];
+
     if (!user) {
       return res.status(400).send({
         message: 'User not found',
