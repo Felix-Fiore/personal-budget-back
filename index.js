@@ -29,7 +29,7 @@ const sequelizeStart = async () => {
 sequelizeStart();
 
 // CORS
-app.use(cors());
+//app.use(cors());
 
 // Parsing JSON
 app.use(express.json());
