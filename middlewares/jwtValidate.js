@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const jwtValidate = (req, res, next) => {
-  //x-token headers
+  //authorization headers
 
-  const token = req.header('x-token');
+  const token = req.header('authorization');
 
   if (!token) {
     return res.status(401).send({
