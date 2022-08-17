@@ -45,9 +45,9 @@ const createOperation = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    /* res.status(500).send({
       message: 'Operation creation failed',
-    });
+    }); */
   }
 };
 
