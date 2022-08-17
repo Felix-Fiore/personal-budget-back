@@ -26,12 +26,12 @@ const getOperationsByCategory = async (req, res) => {
 };
 
 const createOperation = async (req, res) => {
-  const { type, category, amount, date } = req.body;
+  const { type, concept, amount, date } = req.body;
 
   try {
     const newOperation = {
       type: type,
-      category: category,
+      concept: concept,
       amount: amount,
       date: date,
       uid: req.uid,
@@ -54,7 +54,7 @@ const createOperation = async (req, res) => {
 const updateOperation = async (req, res) => {
   const operationId = req.params.id;
 
-  const { category, amount, date } = req.body;
+  const { concept, amount, date } = req.body;
 
   try {
     const operation = await operations.findAll({
@@ -64,7 +64,7 @@ const updateOperation = async (req, res) => {
     });
 
     const newOperation = {
-      category,
+      concept,
       amount,
       date,
     };
