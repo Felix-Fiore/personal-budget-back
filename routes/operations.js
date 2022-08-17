@@ -24,10 +24,10 @@ router.get('/category', getOperationsByCategory);
 router.post(
   '/',
   [
-    check('type', 'Type is required').not().isEmpty(),
-    check('concept', 'Concept is required').not().isEmpty(),
     check('amount', 'Amount is required').not().isEmpty(),
+    check('concept', 'Concept is required').not().isEmpty(),
     check('date', 'Date is required').not().isEmpty(),
+    check('type', 'Type is required').not().isEmpty(),
     fieldValidator,
   ],
   createOperation
@@ -38,8 +38,8 @@ router.delete('/:id', deleteOperation);
 router.put(
   '/:id',
   [
-    check('concept', 'Concept is required').not().isEmpty(),
     check('amount', 'Amount is required').not().isEmpty(),
+    check('concept', 'Concept is required').not().isEmpty(),
     check('date', 'Date is required').custom(date),
 
     fieldValidator,

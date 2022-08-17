@@ -26,14 +26,14 @@ const getOperationsByCategory = async (req, res) => {
 };
 
 const createOperation = async (req, res) => {
-  const { type, concept, amount, date } = req.body;
+  const { amount, concept, date, type } = req.body;
 
   try {
     const newOperation = {
-      type: type,
-      concept: concept,
       amount: amount,
+      concept: concept,
       date: date,
+      type: type,
       uid: req.uid,
     };
 
@@ -45,16 +45,16 @@ const createOperation = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    /* res.status(500).send({
+    res.status(500).send({
       message: 'Operation creation failed',
-    }); */
+    });
   }
 };
 
 const updateOperation = async (req, res) => {
   const operationId = req.params.id;
 
-  const { concept, amount, date } = req.body;
+  const { amount, concept, date } = req.body;
 
   try {
     const operation = await operations.findAll({
@@ -64,8 +64,8 @@ const updateOperation = async (req, res) => {
     });
 
     const newOperation = {
-      concept,
       amount,
+      concept,
       date,
     };
 
