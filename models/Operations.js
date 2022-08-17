@@ -13,7 +13,7 @@ const operations = sequelize.define('operations', {
     allowNull: false,
   },
 
-  category: {
+  concept: {
     type: DataTypes.STRING,
     allowNull: false,
   },
