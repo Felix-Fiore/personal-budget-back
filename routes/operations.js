@@ -25,10 +25,9 @@ router.post(
   '/',
   [
     check('type', 'Type is required').not().isEmpty(),
-    check('category', 'Category is required').not().isEmpty(),
+    check('concept', 'Concept is required').not().isEmpty(),
     check('amount', 'Amount is required').not().isEmpty(),
     check('date', 'Date is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty(),
     fieldValidator,
   ],
   createOperation
