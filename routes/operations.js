@@ -38,7 +38,7 @@ router.delete('/:id', deleteOperation);
 router.put(
   '/:id',
   [
-    check('category', 'Category is required').not().isEmpty(),
+    check('concept', 'Concept is required').not().isEmpty(),
     check('amount', 'Amount is required').not().isEmpty(),
     check('date', 'Date is required').custom(date),
 
